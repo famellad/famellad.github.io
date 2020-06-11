@@ -59,14 +59,17 @@ function requestURI (fileURI) {
  * @param {string} fileURI
  */ 
 function asyncGet (fileURI) {
+    var fileStr = "";
+    
     requestURI(fileURI).then(
         function (value) {
             // This is executed if the file is properly fetched
             // The contents of the file are held in value
-            return value;
+            fileStr = value;
         },
         function (reason) {
             console.error("Something wrong", reason);
-            return "";
         });
+    
+    return fileStr;
 }
