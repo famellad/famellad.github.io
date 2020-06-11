@@ -69,6 +69,4 @@ function asyncGet (fileURI) {
             console.error("Something wrong", reason);
             return "";
         });
-    
-    return "";
 }
