@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BOIDS!</title>
+        <script type = "application/x-javascript">
+            
+            /**************************************************************************
+            *   Copyright (C) 2008 by elsamuko                                        *
+            *   elsamuko@gmail.com                                                    *
+            *                                                                         *
+            *   This program is free software; you can redistribute it and/or modify  *
+            *   it under the terms of the GNU General Public License as published by  *
+            *   the Free Software Foundation; either version 2 of the License, or     *
+            *   (at your option) any later version.                                   *
+            *                                                                         *
+            *   This program is distributed in the hope that it will be useful,       *
+            *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+            *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+            *   GNU General Public License for more details.                          *
+            *                                                                         *
+            *   You should have received a copy of the GNU General Public License     *
+            *   along with this program; if not, write to the                         *
+            *   Free Software Foundation, Inc.,                                       *
+            *   59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.             *
+            ***************************************************************************/
+            
+            // env values
+            var finish = false;
+            var scale = 0.5;
+            
+            // canvas
+            var ctx;
+            var oheight = 500; //window.innerHeight-25;
+            var owidth = 500; //window.innerWidth-25;
+            
+            // boids
+            var MAX_BOIDS = 40 * 1/(scale*scale);
+            var boids = new Array(MAX_BOIDS);
+            for (var k=0; k<MAX_BOIDS; k++){
+                boids[k] = new boid(2+owidth*Math.random(),oheight*Math.random(),0,0);
+            }
+            var boids_new = new Array(MAX_BOIDS);
+            for (var k=0; k<MAX_BOIDS; k++){
+                boids_new[k] = new boid(2+owidth*Math.random(),oheight*Math.random(),0,0);
+            }
+            
+            // parameters
+            var c_moveWith  = 2000;
+            var c_moveTo    = 200;
+            var c_moveAway  = 60000;
+            var maxSpeed    = 28 * scale;
+            var sqrMaxSpeed = maxSpeed*maxSpeed;
+            var minDistance = 20;
+            var sight       = 240 * scale;
+            var fearEagle   = 0.01;
+
+            var damping     = 0.65;
+            var amag        = 11;
+            var rmag        = 120;
+            var bonds       = true;
+            var rfreq       = 0.001
+
+            
+            
+            // mouse
+            var tmp         = 0;
+            var mousex      = 0;
+            var mousey      = 0;
+            
+            function boid(posxin,posyin,momxin,momyin) {
+                this.posx    = posxin;
+                this.posy    = posyin;
+                this.momx    = momxin;
+                this.momy    = momyin;
+            }
+            
+            function init() {
+                var canvas = document.getElementsByTagName('canvas')[0];
+                canvas.width = owidth;
+                canvas.height = oheight;
+                ctx = canvas.getContext('2d');
+                
+                document.onkeydown = keyDown;
+                document.onmousemove = mouseMove;
+                
+                start_time = new Date().getTime();
+                timer = setTimeout('start()', 200);
+            }
+
+            function initVars() {
+                damping = 1 - parseFloat(document.params.damping.value);
+                if (damping > 1) {
+                    damping = 1;
+                    document.params.damping.value = "1.0";
+                }
+                else if (damping < 0) {
+                    damping = 0;
+                    document.params.damping.value = "0.0";
+                }
+
+                rfreq = parseFloat(document.params.rFreq.value);
+                if (rfreq > 1) {
+                    rfreq = 1;
+                    document.params.rFreq.value = "1.0";
+                }
+                else if (rfreq < 0) {
+                    rfreq = 0;
+                    document.params.rFreq.value = "0.0";
+                }
+
+                amag = parseFloat(document.params.attMag.value);
+                rmag = parseFloat(document.params.repMag.value);
+
+                bonds = document.params.bonds.checked;
+            }
+            
+            // start/stop
+            function keyDown(e){
+                if(e.keyCode==83){ //'s'
+                    if(finish) {
+                        finish = false;
+                        timer = setTimeout('start()', 33);
+                    }else{
+                        finish = true;
+                    }
+                }
+            }
+            
+            // eagle
+            function mouseMove(e){
+                mousex=e.pageX;
+                mousey=e.pageY;
+            }
+            
+            // run
+            function start() {
+                //algorithm
+                iterate();
+                
+                //graphics
+                draw();
+                
+                //loop
+                if (! (finish)) {
+                    timer = setTimeout('start()', 20);
+                } else {
+                    end();
+                }
+            }
+            
+            // the iteration, isn't it?
+            function iterate() {
+                for ( var a = 0; a < MAX_BOIDS; a++ ) {
+                    
+                    // movement rules
+                    followRules( boids_new[a] );
+                    fleeFromEagle( boids_new[a] );
+                    borderConstraints( boids_new[a]);
+                    
+                    // some randomness
+                    if (Math.random() < rfreq) {
+                        boids_new[a].momx += 20 * ( Math.random() - 0.5 );
+                        boids_new[a].momy += 20 * ( Math.random() - 0.5 );
+                    }
+                    // set new place
+                    boids_new[a].posx += boids_new[a].momx;
+                    boids_new[a].posy += boids_new[a].momy;
+                    
+                }
+                boids=boids_new;
+            }
+            
+            // flee from the eagle
+            function fleeFromEagle( arg ) {
+                var dposx = arg.posx - mousex;
+                var dposy = arg.posy - mousey;
+                
+                var d = Math.sqrt(dposx*dposx+dposy*dposy);
+                if ( d < sight ) {
+                    arg.momx += dposx * ( -maxSpeed / sight * d + maxSpeed ) * fearEagle;
+                    arg.momy += dposy * ( -maxSpeed / sight * d + maxSpeed ) * fearEagle;
+                }
+            }
+            
+            // follow three rules: separation, cohesion, alignment
+            function followRules( arg ) {
+                var dposx=0;
+                var dposy=0;
+                
+                var MA_DPOSX=0;
+                var MA_DPOSY=0;
+                var MT_DPOSX=0;
+                var MT_DPOSY=0;
+                var RP_MOMX=0;
+                var RP_MOMY=0;
+                
+                var d = 0;
+                var i = 0;
+                for ( var a = 0; a < MAX_BOIDS; a++ ) {
+                    dposx = arg.posx - boids[a].posx;
+                    dposy = arg.posy - boids[a].posy;
+                    
+                    d = dposx*dposx+dposy*dposy;
+                    if ( d < sight*sight ) {
+                        // move away (separation): steer to avoid crowding local flockmates
+                        //MA_DPOSX -= dposx * ( -maxSpeed / sight * d + maxSpeed );
+                        //MA_DPOSY -= dposy * ( -maxSpeed / sight * d + maxSpeed );
+                        
+                        if ( d != 0 && d < sight*sight/10 ) {
+                                RP_MOMX += scale * rmag * dposx /d;
+                                RP_MOMY += scale * rmag * dposy /d;
+                        }
+
+                        if ( d != 0 && d < sight*sight ) {
+                                RP_MOMX -= scale * amag * dposx /d;
+                                RP_MOMY -= scale * amag * dposy /d;
+                        }
+                        // move to (cohesion): steer to move toward the average position of local flockmates
+                        //MT_DPOSX += arg.posx - boids[a].posx;
+                        //MT_DPOSY += arg.posy - boids[a].posy;
+                        
+                        // move with (alignment): steer towards the average heading of local flockmates
+                        //MW_MOMX += boids[a].momx;
+                        //MW_MOMY += boids[a].momy;
+                        
+                        ++i;
+                    }
+                }
+                //arg.momx -= MA_DPOSX / ( c_moveAway * i );
+                //arg.momy -= MA_DPOSY / ( c_moveAway * i );
+                //arg.momx -= MT_DPOSX / ( c_moveTo * i );
+                //arg.momy -= MT_DPOSY / ( c_moveTo * i );
+                arg.momx += RP_MOMX;
+                arg.momy += RP_MOMY;
+                arg.momx *= damping;
+                arg.momy *= damping;
+            }
+            
+            function borderConstraints( arg ) {
+                if ( arg.posx > owidth )  {arg.posx = owidth; arg.momx = -arg.momx;}
+                if ( arg.posy > oheight ) {arg.posy = oheight; arg.momy = -arg.momy;}
+                if ( arg.posx < 0 )       {arg.posx = 0; arg.momx = -arg.momx;}
+                if ( arg.posy < 0 )       {arg.posy = 0; arg.momy = -arg.momy;}
+                
+                if ( arg.momx*arg.momx > sqrMaxSpeed ) arg.momx = sgn( arg.momx ) * maxSpeed;
+                if ( arg.momy*arg.momy > sqrMaxSpeed ) arg.momy = sgn( arg.momy ) * maxSpeed;
+            }
+            
+            function sgn(x){
+                if(x>0)return 1;
+                else if(x<0)return -1;
+                else return 0;
+            }
+            
+            function draw() {
+                //clean
+                //ctx.clearRect(0,0,owidth,oheight);
+                ctx.lineWidth = 1;
+
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+                ctx.fillRect(0, 0, owidth, oheight);
+                
+                ctx.strokeStyle = "white";  
+                ctx.fillStyle = "white";              
+                ctx.strokeRect(0,0,owidth,oheight);
+                
+                
+                //info
+                // ctx.fillText("MOVEWITH: " + Math.round(c_moveWith),   10, 20);
+                // ctx.fillText("MOVETO: "   + Math.round(c_moveTo),     10, 40);
+                // ctx.fillText("MOVEAWAY: " + Math.round(c_moveAway),  160, 20);
+                // ctx.fillText("MAXSPEED: " + Math.round(maxSpeed),    160, 40);
+                // ctx.fillText("MINDIST: "  + Math.round(minDistance), 310, 20);
+                // ctx.fillText("SIGHT: "    + Math.round(sight),       310, 40);
+                ctx.fillText("MOUSEX: "   + Math.round(mousex),      20, 20);
+                ctx.fillText("MOUSEY: "   + Math.round(mousey),      20, 40);
+
+                //start drawing
+                ctx.lineWidth = 10;
+                ctx.strokeStyle = '#444'
+                ctx.beginPath();
+                //draw arc: arc(x, y, radius, startAngle, endAngle, anticlockwise)
+                ctx.arc(mousex, mousey, 80, Math.PI*2, 0, true);
+                //end drawing
+                ctx.closePath();
+                //fill it so you could see it
+                ctx.stroke();
+                
+                //boids
+                for (var i=0; i<MAX_BOIDS; i++){
+                    ctx.save();
+
+                    if (bonds) {
+                        for (var j=i; j<MAX_BOIDS; j++) {
+                            dposx = boids[i].posx - boids[j].posx;
+                            dposy = boids[i].posy - boids[j].posy;
+                        
+                            d = dposx*dposx+dposy*dposy;
+
+                            if (d < 2000 ) {
+                                ctx.lineWidth = Math.min(800000 / (d*d), 6);
+                                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                                ctx.beginPath();
+                                ctx.moveTo(boids[i].posx, boids[i].posy);
+                                ctx.lineTo(boids[j].posx, boids[j].posy);
+                                ctx.stroke();  
+                            }
+                        }
+                    }
+                    
+                    //ctx.fillRect(Math.round(boids[i].posx), Math.round(boids[i].posy), 2, 2);
+                    //start drawing
+                    ctx.beginPath();
+                    //draw arc: arc(x, y, radius, startAngle, endAngle, anticlockwise)
+                    ctx.arc(boids[i].posx, boids[i].posy, 3, Math.PI*2, 0, true);
+                    //end drawing
+                    ctx.closePath();
+                    //fill it so you could see it
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+            
+            function end(){
+                clearTimeout(timer);
+            }
+            
+        </script>
+        <style type="text/css">
+            body {
+                background: #333 url("http://24.media.tumblr.com/tumblr_m94hsknDG81qcayx8o1_1280.png");
+                color: #bbb;
+                font-family: Arial, sans;      
+            }
+    
+            p {
+                text-shadow: 1px 1px 2px #000;
+            }
+
+            input {
+                background: #aaa url("http://25.media.tumblr.com/tumblr_m93lz6qFwp1qcayx8o1_r1_1280.png"); 
+                font-weight: bold; 
+                text-align: right;
+                padding-right: 8px;
+                border-left: 1px solid #444;
+                border-top: 1px solid #444;
+                border-right: 1px solid #ccc;
+                border-bottom: 1px solid #ccc;  
+                height: 1.9em;
+                width: 4em;  
+                border-radius: 8px;  
+            }
+
+            button {
+                background: #aaa url("http://25.media.tumblr.com/tumblr_m93lz6qFwp1qcayx8o1_r1_1280.png"); 
+                font-weight: bold; 
+                text-align: center;
+                padding: 5px;
+                border-right: 1px solid #444;
+                border-bottom: 1px solid #444;
+                border-left: 1px solid #ccc;
+                border-top: 1px solid #ccc;    
+                border-radius: 8px; 
+            }
+            
+            #canvas {
+                position: absolute;
+                border: 1px solid #fff;
+            }
+
+            #paramForm {
+                position: relative;
+                left: 530px;
+            }
+        </style>
+    </head>
+    <body onload = "init()">
+        <canvas id = "canvas" width = "500" height = "500">
+            <p> This demo requires a browser that supports the <a href = "http://www.w3.org/html/wg/html5/"> HTML5 </a> &lt;canvas&gt; feature.</p>
+        </canvas>
+        <form name="params" id="paramForm">
+            <p> Damping (0.0 - 1.0): <input type="text" name="damping" value="0.35"/> (0.35) </p>
+            <p> Twitch Frequency (0.0 - 1.0): <input type="text" name="rFreq" value="0.001"/> (0.001) </p>           
+            <p> Attraction Magnitude: <input type="text" name="attMag" value="11"/> (11) </p>
+            <p> Repulsion Magnitude: <input type="text" name="repMag" value="120"/> (120) </p>           
+            <p> <input type="checkbox" name="bonds" checked="true"> Draw Bonds </p>
+            <p><button type="button" onclick="initVars()">Apply</button></p>
+        </form>
+    </body>
+</html>
