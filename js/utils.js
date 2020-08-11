@@ -73,3 +73,35 @@ function asyncGet (fileURI) {
     
     return fileStr;
 }
+
+/**
+ * Issues the client to send an email to the specified address,
+ * with the specified subject and contents
+ * @param {string} address
+ * @param {string} subject
+ * @param {string} body
+ */ 
+function sendEmail (address, subject, body) {
+    // Create the actual URI
+    var hrefString = "mailto:".concat(address).concat("subject=").concat(subject, "&body=", body);
+    
+    // Send to the browser for parsing
+    window.location.href = hrefString;
+}
+
+/**
+ * Issues the client to send a message using the Whatsapp protocol,
+ * with the specified contents
+ * @param {string} number
+ * @param {string} text
+ */ 
+function sendWhatsapp (number, text) {
+    // Pre-sanitize the text string
+    text = text.replace(" ", "%20");
+
+    // Create the actual URI
+    var hrefString = "whatsapp://send?phone=".concat(number).concat("&text=").concat(text);
+
+    // Send to the browser for parsing
+    window.location.href = hrefString;
+}
