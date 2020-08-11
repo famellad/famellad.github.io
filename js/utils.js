@@ -83,7 +83,7 @@ function asyncGet (fileURI) {
  */ 
 function sendEmail (address, subject, body) {
     // Create the actual URI
-    var hrefString = "mailto:".concat(address).concat("subject=").concat(subject, "&body=", body);
+    var hrefString = "mailto:".concat(address).concat("?subject=").concat(subject, "&body=", body);
     
     // Send to the browser for parsing
     window.location.href = hrefString;
