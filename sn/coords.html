@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Subnautica Coordinate Triangulator</title>
+    <link rel="stylesheet" href="snc.css">
+    <script src="snc.js"></script>
+</head>
+<body>
+    <a href="batch.html">Batch triangulate</a>
+    <form id="coordsForm">
+        0: <input id="zero" type="number"><br>
+        W: <input id="west" type="number"><br>
+        N: <input id="north" type="number"><br>
+        <input type="button" value="Calculate" onclick="do_once();">
+    </form>
+    <div id="finalCoords">
+        
+    </div>
+    <p id="directions">
+        Waiting for coords...
+    </p>
+</body>
+</html>
