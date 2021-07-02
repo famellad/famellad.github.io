@@ -180,7 +180,7 @@ function do_calc(zr, wr, nr) {
 }
 
 function do_once() {
-    batch = true;
+    batch = false;
 
     document.getElementById("directions").innerHTML = "Intersecting...";
 
