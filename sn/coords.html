@@ -1,8 +1,12 @@
 <html>
 <head>
+    <meta charset="UTF-8" >
     <title>Subnautica Coordinate Triangulator</title>
     <link rel="stylesheet" href="snc.css">
+    <!--script src="https://famellad.github.io/js/utils.js"></script-->
+    <script src="../js/utils.js"></script>
     <script src="snc.js"></script>
+    <script src="snmap.js"></script>
 </head>
 <body>
     <a href="batch.html">Batch triangulate</a>
@@ -18,5 +22,8 @@
     <p id="directions">
         Waiting for coords...
     </p>
+    <div id="mapDiv">
+        <canvas id="map" width="1000" height="1000" ></canvas>
+    </div>
 </body>
 </html>

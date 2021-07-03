@@ -21,3 +21,31 @@ body a{
 #coordsForm {
     font-size: 1.5rem;
 }
+
+#map {
+    position: absolute;
+    border: 3px solid #fff;
+    background-image: url("img/sn-map.png");
+}
+
+.landmark {
+    position: absolute;
+    box-shadow: none !important;
+}
+
+.markerText {
+    position: relative;
+    font-weight: 800;
+    margin-left: 20px;
+    margin-top: -10px;
+    text-shadow: #000 1px 1px;
+}
+
+.marker {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 12px;
+    height: 12px;
+    box-shadow: #000 1px 1px;
+}

@@ -188,7 +188,9 @@ function do_once() {
     wr = document.getElementById("west").value;
     nr = document.getElementById("north").value;
 
-    do_calc(zr, wr, nr);
+    f = do_calc(zr, wr, nr);
+
+    add_marker(f[0], 0, "ffffff", "Triangulated", "custom");
 }
 
 function do_batch() {

@@ -29,11 +29,15 @@ function sanitizeString (inStr) {
 /**
  * Places a GET request for the file from the specified URI asynchronously
  * @param {string} fileURI
+ * @param {string} mimeString
  */
-function requestURI (fileURI) {
+function requestURI (fileURI, mimeString="text/plain") {
     return new Promise(
         function (resolve, reject) {
             const request = new XMLHttpRequest();
+
+            request.overrideMimeType(mimeString);
+
             request.onload = function () {
                 if (this.status === 200) {
                     // Request succeeded
@@ -66,12 +70,12 @@ function asyncGet (fileURI) {
             // This is executed if the file is properly fetched
             // The contents of the file are held in value
             fileStr = value;
+            return fileStr;
         },
         function (reason) {
             console.error("Something wrong", reason);
+            return fileStr;
         });
-    
-    return fileStr;
 }
 
 /**
