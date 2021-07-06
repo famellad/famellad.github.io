@@ -31,6 +31,9 @@ body a{
 .landmark {
     position: absolute;
     box-shadow: none !important;
+    font-size: 0.5em;
+    transition: 0.2s;
+    z-index: 0;
 }
 
 .markerText {
@@ -39,6 +42,12 @@ body a{
     margin-left: 20px;
     margin-top: -10px;
     text-shadow: #000 1px 1px;
+}
+
+.landmark:hover {
+    font-size: 1em;
+    transition: 0.2s;
+    z-index: 999;
 }
 
 .marker {
