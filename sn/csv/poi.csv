@@ -5,7 +5,12 @@ Points of Interest,poi
 421,1414,0,5aa02c,Northern Island
 -641,-622,0,5aa02c,Floating Island
 -635,-276,250,5aa02c,Bad Vibes Cave?
+105,679,25,cc6731,Quartz Geyser
+1027,872,250,cc6731,BZ Geyser A
+1046,1096,260,cc6731, BZ Geyser B
 # Alien Stuff
--705,-310,280,04dbc5,Alien Vent
--948,-247,300,04dbc5,Alien Sanctuary Alpha
--902,787,0,04dbc5,Alien Facility
+-705,-310,280,04dbc5,Vent
+-948,-247,300,04dbc5,Sanctuary Alpha
+-771,846,224,04dbc5,Portal MF
+742,909,170,04dbc5,Vent
+860,1471,285,04dbc5,Vent
