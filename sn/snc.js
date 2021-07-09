@@ -7,6 +7,10 @@ iks_canvas = 4000;
 
 batch = false;
 
+function calc_planar_distance(linear, depth) {
+    return Math.sqrt(linear*linear - depth*depth);
+}
+
 function dist(c0, c1) {
     x0 = c0[0];
     y0 = c0[1];
@@ -128,7 +132,21 @@ function intersect_circles(c0, r0, c1, r1) {
     return [p30, p31];
 }
 
-function do_calc(zr, wr, nr) {
+function do_calc(zl, wl, nl, depth) {
+    // Check if zl, wl and nl are on the surface
+    zr = wr = nr = 0;
+    
+    if (depth == 0) {
+        zr = zl;
+        wr = wl;
+        nr = nl;
+    }
+    else{
+        zr = calc_planar_distance(zl, depth);
+        wr = calc_planar_distance(wl, depth);
+        nr = calc_planar_distance(nl, depth);
+    }
+
     // Intersect Zero and West
     if (!batch)
         document.getElementById("directions").innerHTML += "<br> 0W";
@@ -187,10 +205,11 @@ function do_once() {
     zr = document.getElementById("zero").value;
     wr = document.getElementById("west").value;
     nr = document.getElementById("north").value;
+    depth = document.getElementById("depth").value;
 
-    f = do_calc(zr, wr, nr);
+    f = do_calc(zr, wr, nr, depth);
 
-    add_marker(f[0], 0, "ffffff", "Triangulated", "custom");
+    add_marker(f[0], depth, "ffffff", "Triangulated", "custom");
 }
 
 function do_batch() {
@@ -198,6 +217,7 @@ function do_batch() {
 
     final_snc = [];
     final_iks = [];
+    depths = [];
 
     document.getElementById("directions").innerHTML = "Batch processing...";
 
@@ -208,9 +228,11 @@ function do_batch() {
     for (let i = 0; i < lines.length; i++) {
         console.log(i);
         scsv = lines[i].split(",");
-        temp = do_calc(scsv[0], scsv[1], scsv[2]);
-        final_snc[i] = temp[0];
-        final_iks[i] = temp[1];
+        f = do_calc(scsv[0], scsv[1], scsv[2], scsv[3]);
+        final_snc[i] = f[0];
+        final_iks[i] = f[1];
+        depths[i] = scsv[3];
+        add_marker(f[0], scsv[3], "ffffff", i, "custom", true, false);
     }
 
     document.getElementById("directions").innerHTML += "<br><br> iks coords:";
@@ -222,5 +244,4 @@ function do_batch() {
 
     for (let i = 0; i < final_snc.length; i++)
         document.getElementById("directions").innerHTML += "<br>" + (i+1) + ": " + final_snc[i];
-    
 }

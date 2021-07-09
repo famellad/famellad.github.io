@@ -58,3 +58,12 @@ body a{
     height: 12px;
     box-shadow: #000 1px 1px;
 }
+
+.small-marker {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    width: 3px;
+    height: 3px;
+    /*box-shadow: #000 1px 1px;*/
+}

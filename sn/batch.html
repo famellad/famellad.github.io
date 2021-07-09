@@ -4,11 +4,12 @@
     <title>Subnautica Coordinate Batch Triangulator</title>
     <link rel="stylesheet" href="snc.css">
     <script src="snc.js"></script>
+    <script src="snmap.js"></script>
 </head>
 <body>
     <a href="coords.html">Go Back</a>
     <form id="coordsForm">
-        <textarea rows="40" cols="40" id="batchList" name="text" placeholder="Comma separated values (0,W,N), one triad per line."></textarea><br>
+        <textarea rows="40" cols="40" id="batchList" name="text" placeholder="Comma separated values (0,W,N,depth), one quartet per line."></textarea><br>
         <input type="button" value="Calculate" onclick="do_batch();">
     </form>
     <div id="finalCoords">
@@ -17,5 +18,8 @@
     <p id="directions">
         Waiting for input...
     </p>
+    <div id="mapDiv">
+        <canvas id="map" width="1000" height="1000" ></canvas>
+    </div>
 </body>
 </html>

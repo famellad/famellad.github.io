@@ -40,22 +40,33 @@ function parse_csv (str) {
     }
 }
 
-function add_marker (snc, depth, m_color, m_label, m_class) {
+function add_marker (snc, depth, m_color, m_label, m_class, small=false, draw_label=true) {
     iks = snc2iks(snc);
 
     console.log(iks);
-    
-    c_top = iks[1] + (marker_offset - 4 * canvas_factor) + "px";
-    c_left = iks[0] + (marker_offset + 4 * canvas_factor) + "px";
-    label = m_label + " (" + depth + "m)";
+
+    marker = "marker";
+    offset = marker_offset;
+    label = "";
+
+    if (small) {
+        offset = marker_offset/4;
+        marker = "small-marker";
+    }
+
+    c_top = iks[1] + (offset - 4 * canvas_factor + 2) + "px";
+    c_left = iks[0] + (offset + 4 * canvas_factor) + "px";
+    if (draw_label)
+        label = m_label + " (" + depth + "m)";
     color = "#" + m_color;
+    
 
     tmp = "";
 
     md = document.getElementById("mapDiv");
 
     tmp += '<div class="landmark %class" style="margin-top: %top; margin-left: %left;">'.replace("%class", m_class).replace("%top", c_top).replace("%left", c_left);
-    tmp += '<div class="marker" style="background-color: %color;"></div>'.replace("%color", color);
+    tmp += '<div class="%marker" style="background-color: %color;"></div>'.replace("%color", color).replace("%marker", marker);
     tmp += '<div class="markerText" style="color: %color;">%label</div>'.replace("%color", color).replace("%label", label);
     tmp += '</div>';
 
