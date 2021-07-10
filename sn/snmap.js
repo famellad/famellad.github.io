@@ -1,5 +1,5 @@
 canvas_factor = 0.25;
-marker_offset = -4;
+marker_offset = -7;
 csv_list = ["fam.csv","markers.csv","poi.csv"];
 
 function snc2iks (snc) {
@@ -51,7 +51,7 @@ function add_marker (snc, depth, m_color, m_label, m_class, small=false, draw_la
     label = "";
 
     if (small) {
-        offset = marker_offset/4;
+        offset = marker_offset/1.8;
         top_off = 2;
         marker = "smallMarker";
     }

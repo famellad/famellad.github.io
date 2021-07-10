@@ -64,10 +64,17 @@ textarea {
     padding-top: 0.2rem;
 }
 
-#map {
+#mapDiv {
     position: absolute;
     border: 3px solid rgb(255, 213, 97);
     border-radius: 62px;
+    background-color: rgb(41, 66, 90);
+    width: 1000px;
+    height: 1000px;
+}
+
+#map {
+    position: absolute;
     background-image: url("img/sn-map.svg");
     background-size: 1000px;
 }
