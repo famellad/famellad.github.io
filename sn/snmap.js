@@ -47,14 +47,16 @@ function add_marker (snc, depth, m_color, m_label, m_class, small=false, draw_la
 
     marker = "marker";
     offset = marker_offset;
+    top_off = 0;
     label = "";
 
     if (small) {
         offset = marker_offset/4;
-        marker = "small-marker";
+        top_off = 2;
+        marker = "smallMarker";
     }
 
-    c_top = iks[1] + (offset - 4 * canvas_factor + 2) + "px";
+    c_top = iks[1] + (offset - 4 * canvas_factor + top_off) + "px";
     c_left = iks[0] + (offset + 4 * canvas_factor) + "px";
     if (draw_label)
         label = m_label + " (" + depth + "m)";

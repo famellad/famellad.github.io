@@ -14,12 +14,54 @@ body a{
     color: #fff;
 }
 
+.coordsInput {
+    border: none;
+    border-radius: 0.3rem;
+    border: rgb(255, 213, 97) 2px solid;
+    background: rgb(41, 66, 90);
+    color: rgb(255, 213, 97);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: right;
+    width: 4rem;
+    margin: 5px;
+    margin-left: 15px;
+}
+
+textarea {
+    width: 24rem !important;
+    text-align: left !important;
+}
+
+.coordsButton {
+    font-family: 'Share Tech Mono', monospace;
+    background: rgb(83, 140, 173);
+    border: rgb(255, 213, 97) 2px solid;
+    border-radius: 5px;
+    color: white;
+    padding: 10px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1.5rem;
+}
+
 #finalCoords {
     font-size: 2rem;
 }
 
 #coordsForm {
+    display: grid;
+    margin-top: 1rem;
+    width: 350px;
+    grid-template-columns: 30% 22% 5% 0%;
     font-size: 1.5rem;
+    text-align: right;
+}
+
+#coordsForm div {
+    padding-top: 0.2rem;
 }
 
 #map {
@@ -41,7 +83,15 @@ body a{
     font-weight: 800;
     margin-left: 20px;
     margin-top: -10px;
-    text-shadow: #000 1px 1px;
+    text-shadow: rgba(0, 0, 0, 0.5) 1px 1px;
+    transition: 0.2s;
+    padding: 2px;
+    border-radius: 5px;;
+}
+
+.landmark:hover .markerText {
+    background: rgba(26, 26, 26, 0.8);
+    transition: 0.2s;
 }
 
 .landmark:hover {
@@ -56,14 +106,27 @@ body a{
     border-radius: 10px;
     width: 12px;
     height: 12px;
-    box-shadow: #000 1px 1px;
+    box-shadow: rgba(0, 0, 0, 0.5) 1px 1px;
 }
 
-.small-marker {
+.smallMarker {
     position: relative;
     border: 1px solid #ddd;
     border-radius: 2px;
     width: 3px;
     height: 3px;
     /*box-shadow: #000 1px 1px;*/
+}
+
+/* EXTRAS */
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

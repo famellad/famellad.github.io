@@ -238,10 +238,10 @@ function do_batch() {
     document.getElementById("directions").innerHTML += "<br><br> iks coords:";
 
     for (let i = 0; i < final_iks.length; i++)
-        document.getElementById("directions").innerHTML += "<br>" + (i+1) + ": " + final_iks[i];
+        document.getElementById("directions").innerHTML += "<br>" + (i+1) + ": " + final_iks[i] + " (" + depths[i] + ")";
 
     document.getElementById("directions").innerHTML += "<br><br> SNC coords:";
 
     for (let i = 0; i < final_snc.length; i++)
-        document.getElementById("directions").innerHTML += "<br>" + (i+1) + ": " + final_snc[i];
+        document.getElementById("directions").innerHTML += "<br>" + (i+1) + ": " + final_iks[i] + " (" + depths[i] + ")";
 }

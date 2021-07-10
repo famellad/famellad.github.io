@@ -9,14 +9,14 @@
     <script src="snmap.js"></script>
 </head>
 <body>
-    <a href="batch.html">Batch triangulate</a>
+    <a href="batch.html">Batch triangulate</a>    
     <form id="coordsForm">
-        0: <input id="zero" type="number"><br>
-        W: <input id="west" type="number"><br>
-        N: <input id="north" type="number"><br>
-        Depth: <input id="depth" placeholder="0" type="number"><br>
-        <input type="button" value="Calculate" onclick="do_once();">
+        <div>Zero</div><input class="coordsInput" id="zero" type="number"><div>m</div><br>
+        <div>West</div><input class="coordsInput" id="west" type="number"><div>m</div><br>
+        <div>North</div><input class="coordsInput" id="north" type="number"><div>m</div><br>
+        <div>Depth</div><input class="coordsInput" id="depth" placeholder="0" type="number"><div>m</div><br>
     </form>
+    <input class="coordsButton" type="button" value="Triangulate" onclick="do_once();">
     <div id="finalCoords">
         
     </div>
