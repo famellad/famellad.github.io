@@ -66,8 +66,10 @@ textarea {
 
 #map {
     position: absolute;
-    border: 3px solid #fff;
-    background-image: url("img/sn-map.png");
+    border: 3px solid rgb(255, 213, 97);
+    border-radius: 62px;
+    background-image: url("img/sn-map.svg");
+    background-size: 1000px;
 }
 
 .landmark {
