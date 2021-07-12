@@ -32,6 +32,10 @@ body a{
 textarea {
     width: 24rem !important;
     text-align: left !important;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .coordsButton {
@@ -62,6 +66,13 @@ textarea {
 
 #coordsForm div {
     padding-top: 0.2rem;
+}
+
+#layersForm {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    margin-top: 1rem;
+    width: 1000px;
 }
 
 #mapDiv {
@@ -96,6 +107,10 @@ textarea {
     transition: 0.2s;
     padding: 2px;
     border-radius: 5px;;
+}
+
+.landmarkHidden {
+    opacity: 0;
 }
 
 .landmark:hover .markerText {

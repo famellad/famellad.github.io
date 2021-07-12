@@ -1,4 +1,8 @@
-Beacons,beacons
+;Beacons,beacon
 #0,0,0,ff6666,0
 -800,0,0,ff6666,W
 0,800,0,ff6666,N
+;Routes,routes
+-415,-664,410,8dedfc,Grand Reef Cave Entrance
+-555,-488,495,8dedfc,Degasi Deep Base
+-636,-297,625,1bd669,Hell Entrance (GR)
