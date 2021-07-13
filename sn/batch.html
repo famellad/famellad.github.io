@@ -3,6 +3,7 @@
     <meta charset="UTF-8" >
     <title>Subnautica Coordinate Batch Triangulator</title>
     <link rel="stylesheet" href="snc.css">
+    <link rel="stylesheet" href="snc-check.css">
     <script src="snc.js"></script>
     <script src="snmap.js"></script>
 </head>
@@ -18,6 +19,10 @@
     <p id="directions">
         Waiting for input...
     </p>
+    <label class="container">
+        <input type="checkbox" checked="checked" id="customLabel" onchange="toggle_labels();">
+        <span class="checkmark"></span>
+    Labels</label>
     <div id="mapDiv">
         <canvas id="map" width="1000" height="1000" ></canvas>
     </div>

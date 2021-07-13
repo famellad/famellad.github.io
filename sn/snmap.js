@@ -112,10 +112,24 @@ function toggle_layer (layer_id) {
     }
 }
 
+function toggle_labels () {
+    markers = document.getElementsByClassName("markerText");
+
+    hidden = false;
+
+    if (markers[0].classList.contains("landmarkHidden"))
+        hidden = true;
+
+    for (let i = 0; i < markers.length; i++) {
+        if (hidden)
+            markers[i].classList.remove("landmarkHidden");
+        else
+            markers[i].classList.add("landmarkHidden");
+    }
+}
+
 window.onload = function() {
     csv_list.forEach(load_csv);
-
-
 }
 
 

@@ -232,7 +232,7 @@ function do_batch() {
         final_snc[i] = f[0];
         final_iks[i] = f[1];
         depths[i] = scsv[3];
-        add_marker(f[0], scsv[3], "ffffff", i, "custom", true, false);
+        add_marker(f[0], scsv[3], "ffffff", i, true, true);
     }
 
     document.getElementById("directions").innerHTML += "<br><br> iks coords:";
