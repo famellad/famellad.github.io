@@ -26,17 +26,14 @@
 }
 
 html {
-    background: var(--color-cyan);
+    background: #fff;
 }
 
 input {
     border: none;
-    font-size: 3rem;
-    min-height: 4.2rem;
-    border-radius: 3rem;
+    font-size: 1.2rem;
+    border-radius: 1rem;
     box-shadow: inset rgba(0, 0, 0, 0.4) 1px 1px 4px;
-    color: #444;
-    padding-left: 1rem;
 }
 
 .inline {
@@ -90,7 +87,7 @@ input {
 .container {
     margin-left: auto;
     margin-right: auto;
-    max-width: 70rem;
+    max-width: 65rem;
     background: none;
 }
 
@@ -107,7 +104,7 @@ input {
 #about {
     position: inherit;
     margin-top: 1rem;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 #about a {
@@ -116,7 +113,7 @@ input {
 }
 
 #top-logo {
-    max-width: 50%;
+    max-width: 33%;
     margin-left: 1rem;
     margin-top: 0.5rem;
     /* margin-bottom: 1rem; */
@@ -134,20 +131,19 @@ input {
     margin-right: auto;
     padding-top: 3rem;
     padding-bottom: 3rem;
-    max-width: 85%;
+    max-width: 35rem;
 }
 
 #form-grid {
     display: grid;
-    align-items: center;
-    grid-template-columns: 20rem auto;
-    grid-row-gap: 2rem;
+    grid-template-columns: 10rem auto;
+    grid-row-gap: 1rem;
 }
 
 .form-left {
     text-align: right;
     padding-right: 1rem;
-    font-size: 2.5rem;
+    font-size: 1.2rem;
 }
 
 
@@ -157,9 +153,7 @@ input {
     /* min-height: 12rem; */
     background: url("assets/happy_family.jpg");
     background-size: 100%;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    background-color: #fff;
+    background-position: center;
     padding-bottom: 2rem;
 }
 
@@ -169,18 +163,17 @@ input {
     margin-top: 2rem;
     margin-bottom: 2rem;
     padding: 2rem;
-    font-size: 2rem;
-    max-width: 35rem;
+    font-size: 1.5rem;
+    max-width: 30rem;
     text-shadow: none;
-    color: #555;
+    color: #666;
     border-radius: 1rem;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.6);
     box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 5px;
 }
 
 #footer {
     margin-top: -1rem;
-    font-size: 1.4rem;
 }
 
 #sup-footer-container {
@@ -191,26 +184,4 @@ input {
 
 #legal {
     margin-left: 1rem;
-}
-
-@media only screen and (min-width: 1200px) {
-    /* Global */
-    input { font-size: 1.2rem; min-height: 1.8rem; padding-left: 0.5rem; }
-    .container { max-width: 65rem; }
-    
-    /* Header */
-    #about { font-size: 1rem; }
-    #top-logo {max-width: 33%; }
-    
-    /* Form */
-    #container-form { max-width: 35rem; }
-    #form-grid { grid-template-columns: 12rem auto; grid-row-gap: 1rem; }
-    .form-left { font-size: 1.2rem; }
-
-    /* Info */
-    #rokyy-info { background-position: center; }
-    .fluff { font-size: 1.5rem; max-width: 30rem; }
-
-    /* Footer */
-    #footer { font-size: 1rem;}
 }
