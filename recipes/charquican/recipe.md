@@ -1,8 +1,8 @@
 # Charquicán
 
-![A plate of CHARQUICÁN](dish.jpg)
-
 40-50 min, 4 servings.
+
+![A plate of CHARQUICÁN](dish.jpg)
 
 ## Ingredients
 ### Mash
