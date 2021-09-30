@@ -42,7 +42,7 @@
 - Chilean Casserole
   - Mild and comforting beef and potato dish.
 
-- Charquicán
+- [Charquicán](charquican/recipe.md)
   - Potato based dish with very high calorie count and great taste.
 
 - Korean Styled Spicy Chicken
