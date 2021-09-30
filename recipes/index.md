@@ -1,25 +1,25 @@
 # Legend
-⚠ - Considerable deviation from the original recipe
+⚠️ - Considerable deviation from the original recipe
 
-🙒 - Vegetarian
+🌱 - Vegetarian
 
-⏲ - Time sensitive recipe
+🕑 - Time sensitive recipe
 
 # Entrées & Misc.
 
 - Kimchi 
   - Cabbage and green onion stripes fermented in a very spicy sauce. Great side. 
 
-- Emergency Kimchi ⚠
+- Emergency Kimchi ⚠️
   - Deviation with less conventional ingredients and much faster preparation time.
 
-- Tzatziki 🙒
+- Tzatziki 🌱
   - Very fresh cucumber and yogurt based sauce. Great on salads, meats and as a dip.
 
-- Cauliflower Soup 🙒
+- Cauliflower Soup 🌱
   - Very hearty cauliflower soup with a very creamy texture.
 
-- Potato Peel Crisps 🙒
+- Potato Peel Crisps 🌱
   - Extremely easy, cheap and tasty snack made with potato peels.
 
 # Main Dishes
@@ -30,7 +30,7 @@
 - Beef Stroganoff
   - Savory and sour beef dish with cream and pickles.
 
-- Fam’s World Famous Emergency Ramyon ⏲⚠
+- Fam’s World Famous Emergency Ramyon ⚠️🕑
   - Hearty noodle soup with very rich stock. Extremely versatile.
 
 - Salmon Fried Rice
@@ -48,13 +48,13 @@
 - Korean Styled Spicy Chicken
   - Bite sized chicken chunks cooked in a sweet and spicy sauce.
 
-- Emergency Onigiri ⚠
+- Emergency Onigiri ⚠️
   - Rice balls filled with fish. Fairly complete meal that’s very quick to consume.
 
-- Last resort “Onigiri” ⚠
+- Last resort “Onigiri” ⚠️
   - Deviation from the standard onigiri form, while retaining some of the flavor profile.
 
-- Lentil Curry 🙒
+- Lentil Curry 🌱
   - Lentil based curry dish, extremely feeling and with rich flavor.
 
 - Yellow Curry
@@ -63,7 +63,7 @@
 - Green Curry
   - Chicken and basil based thai curry, very savory and fresh.
 
-- Black bean patty 🙒
+- Black bean patty 🌱
   - Black bean and quinoa based vegetarian patty, great texture and taste.
 
 - Chili con Carne
@@ -72,7 +72,7 @@
 - Mackerel Croquettes
   - Inexpensive, bite sized fried mackerel croquettes that are very filling. 
 
-- Cauliflower Croquettes 🙒
+- Cauliflower Croquettes 🌱
   - Bite sized fried cauliflower croquettes that are very filling.
 
 - Three Oils Chicken
@@ -83,13 +83,13 @@
 
 # Side Dishes & Sauces
 
-- Potato Gratin 🙒
+- Potato Gratin 🌱
   - Layered potato dish that can be eaten as a side or on its own.
 
-- Broccoli Stir ⏲🙒
+- Broccoli Stir 🌱🕑
   - Literally the only way to make broccoli edible.
 
-- Iris’ Pizza Dough / Baguette ⏲🙒⚠
+- Iris’ Pizza Dough / Baguette ⚠️🌱🕑
   - Very versatile dough recipe that can be used either as bread or pizza.
 
 - Fam’s Bolognese Sauce
@@ -103,17 +103,17 @@
 
 # Desserts
 
-- María’s Banana Bread ⏲🙒
+- María’s Banana Bread 🌱🕑
   - Very soft and sweet banana bread, perfect as a snack or a side.
 
-- Tiramisu 🙒
+- Tiramisu 🌱
   - Mascarpone and coffee based dessert, very strong flavor profile.
 
-- Emergency Tiramisu 🙒⚠
+- Emergency Tiramisu ⚠️🌱
   - Deviation of the original recipe using cheaper and easier to procure ingredients.
 
-- Last resort Tiramisu 🙒⚠
+- Last resort Tiramisu ⚠️🌱
   - Further deviation using very common and cheap ingredients.
 
-- Nachy’s Leche Asada ⏲🙒
+- Nachy’s Leche Asada 🌱🕑
   - Chilean style flan that is very dense with a noticeable eggy profile.
