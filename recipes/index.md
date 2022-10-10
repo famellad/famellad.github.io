@@ -30,7 +30,7 @@
 - Beef Stroganoff
   - Savory and sour beef dish with cream and pickles.
 
-- Fam’s World Famous Emergency Ramyon ⚠️🕑
+- Fam’s World Famous Emergency Ramyeon ⚠️🕑
   - Hearty noodle soup with very rich stock. Extremely versatile.
 
 - Salmon Fried Rice
