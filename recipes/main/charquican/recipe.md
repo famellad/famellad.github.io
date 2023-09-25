@@ -1,3 +1,5 @@
+[Back to Index](../../index.md)
+
 # Charquicán
 
 40-50 min, 4 servings.
@@ -45,7 +47,7 @@ Fry an egg sunny side up.
 Serve on a plate with the fried egg on top.
 
 ## Vegetarian Options
-Ground meat can be replaced either with seitan, soy protein or tofu. For seitan and tofu, make sure to squeeze all the water out beforehand. Soy protein should be properly rehydrated beforehand.
+Ground meat can be replaced either with seitan, soy protein or eggplant. For seitan make sure to squeeze all the water out beforehand. Soy protein should be properly rehydrated beforehand.
 
 For all three of these, soak them in soy sauce for 15 minutes before adding them to the sautée.
 

@@ -24,7 +24,7 @@
 
 # Main Dishes
 
-- Hungarian Goulash
+- [Hungarian Goulash](main/hu-goulash/recipe.md) (INCOMPLETE)
   - Strong flavored pork dish braised in tomato sauce.
 
 - Beef Stroganoff
@@ -36,13 +36,13 @@
 - Salmon Fried Rice
   - Quick fried rice recipe with a very toasty flavor.
 
-- Fam’s Improved Chilean Chicken Cazuela
+- [Fam’s Improved Chilean Chicken Cazuela](main/chicken-cazuela/recipe.md) (INCOMPLETE)
   - Hearty chicken soup with high calorie count, perfect for rainy days.
 
 - Chilean Casserole
   - Mild and comforting beef and potato dish.
 
-- [Charquicán](charquican/recipe.md)
+- [Charquicán](main/charquican/recipe.md)
   - Potato based dish with very high calorie count and great taste.
 
 - Korean Styled Spicy Chicken
@@ -66,8 +66,8 @@
 - Black bean patty 🌱
   - Black bean and quinoa based vegetarian patty, great texture and taste.
 
-- Chili con Carne
-  - Hearty and spicy tomato and bean based texmex dish.
+- [Chili con Carne](main/chili-con-carne/recipe.md)
+  - Hearty and spicy tomato and bean based texmex dish extravaganza.
 
 - Mackerel Croquettes
   - Inexpensive, bite sized fried mackerel croquettes that are very filling. 
@@ -75,13 +75,13 @@
 - Cauliflower Croquettes 🌱
   - Bite sized fried cauliflower croquettes that are very filling.
 
-- Three Oils Chicken
+- [Three Oils Chicken](main/three-oils-chicken/recipe.md) (INCOMPLETE)
   - Very flavorful chicken inspired on Indian and Middle Eastern cuisine.
 
-- Crescent Chicken
+- [Crescent Chicken](main/crescent-chicken/recipe.md) (INCOMPLETE)
   - Chicken cooked using an assortment of ingredients from the fertile crescent.
 
-# Side Dishes & Sauces
+# Side Dishes, Sauces & More!
 
 - Potato Gratin 🌱
   - Layered potato dish that can be eaten as a side or on its own.
@@ -89,7 +89,7 @@
 - Broccoli Stir 🌱🕑
   - Literally the only way to make broccoli edible.
 
-- Iris’ Pizza Dough / Baguette ⚠️🌱🕑
+- [Iris’ Pizza Dough / Baguette](main/iris-pizza-dough/recipe.md) ⚠️🌱🕑 (INCOMPLETE)
   - Very versatile dough recipe that can be used either as bread or pizza.
 
 - Fam’s Bolognese Sauce

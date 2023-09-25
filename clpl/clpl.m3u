@@ -1,9 +1,9 @@
 #EXTM3U x-tvg-url="" tv-test="Fam's CLPL"
-#EXTINF:-1 tvg-id="7" tvg-name="TVN" tvg-logo="", TVN * | CL
+#EXTINF:-1 tvg-id="7" tvg-name="TVN" tvg-logo="https://famellad.github.io/clpl/img/tvn.png", TVN * | CL
 PLACEHOLDERURL
-#EXTINF:-1 tvg-id="9" tvg-name="Mega" tvg-logo="", Mega * | CL
+#EXTINF:-1 tvg-id="9" tvg-name="Mega" tvg-logo="https://famellad.github.io/clpl/img/mega.png", Mega * | CL
 PLACEHOLDERURL
-#EXTINF:-1 tvg-id="11" tvg-name="CHV" tvg-logo="", CHV * | CL
+#EXTINF:-1 tvg-id="11" tvg-name="CHV" tvg-logo="https://famellad.github.io/clpl/img/chv.png", CHV * | CL
 PLACEHOLDERURL
-#EXTINF:-1 tvg-id="13" tvg-name="C13" tvg-logo="", C13 * | CL
-PLACEHOLDERURL
+#EXTINF:-1 tvg-id="13" tvg-name="C13" tvg-logo="https://famellad.github.io/clpl/img/c13.png", C13 * | CL
+https://dai.google.com/linear/hls/pa/event/bFL1IVq9RNGlWQaqgiFuNw/stream/94ca556a-e671-4c1d-82b4-f2ecf5c871fb:SCL/variant/ed68044fabc13545b407e1c2beeee886/bandwidth/1623600.m3u8
