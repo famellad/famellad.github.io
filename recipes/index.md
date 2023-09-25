@@ -89,7 +89,7 @@
 - Broccoli Stir 🌱🕑
   - Literally the only way to make broccoli edible.
 
-- [Iris’ Pizza Dough / Baguette](main/iris-pizza-dough/recipe.md) ⚠️🌱🕑 (INCOMPLETE)
+- [Iris’ Pizza Dough / Baguette](main/iris-pizza-baguette/recipe.md) ⚠️🌱🕑 (INCOMPLETE)
   - Very versatile dough recipe that can be used either as bread or pizza.
 
 - Fam’s Bolognese Sauce
