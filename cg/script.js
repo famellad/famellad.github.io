@@ -23,7 +23,7 @@ function preload() {
 }
 
 function setup() {
-  font = loadFont('./exres/Oswald-Regular.otf');
+  font = loadFont('https://famellad.github.io/cg/exres/Oswald-Regular.otf');
   frameRate(5);
   var canvas = createCanvas(1920 / _SCALE, 1080 / _SCALE);
   canvas.parent('canvasDiv');
