@@ -1,0 +1,21 @@
+@font-face {
+    font-family: Nunito;
+    src: url(exres/NunitoSans-Regular.ttf);
+}
+
+body {
+    font-family: Nunito, sans-serif;
+}
+
+.p5Canvas {
+    border: dotted black 1px;
+}
+
+.configGrid {
+    display: grid;
+    grid-template-columns: 15em 15em 15em;
+}
+
+.confItem {
+    border: none;
+}

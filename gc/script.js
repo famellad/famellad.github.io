@@ -40,48 +40,47 @@ function draw() {
   noStroke();
 
   getColors();
-      
-  mTextColor = color(255, 255, 255);
-  sTextColor = color(0, 0, 0);
+
+  mText = document.getElementById('nombre').value
+  sText1 = document.getElementById('bajada1').value
+  sText2 = document.getElementById('bajada2').value
 
   y = topBarY;
   h = topBarH;
   w = 600 / _SCALE;
   l = textMargin / _SCALE;
 
+  textFont(font);
 
-  drawBigBanner( 600 );
-  drawSmallBanner( 600 );
-  drawText();
+  drawBigBanner( mText );
+  drawSmallBanner( sText1, sText2 );
 }
 
-function drawBigBanner( width ) {
+function drawBigBanner( mText ) {
   fill(acceColor);
   quad(0, y, w + 20 + 15, y, w + 15, y + h, 0, y + h);
 
   fill(mainColor);
   quad(0, y, w + 20, y, w, y + h, 0, y + h); 
-}
 
-function drawSmallBanner ( width ) {
-  fill(secoColor);
-  quad(0, y + h, w * 0.8 + 16, y + h, w * 0.8, y + 1.6*h, 0, y + 1.6*h);
-}
-
-function drawText() {
-  textFont(font);
-  
   fill(mTextColor);
   textSize(24);
-  text(document.getElementById('nombre').value, l, y + h/1.5);
-  
+  text(mText, l, y + h/1.5);
+}
+
+function drawSmallBanner ( sText1, sText2 ) {
+  fill(secoColor);
+  quad(0, y + h, w * 0.8 + 16, y + h, w * 0.8, y + 1.6*h, 0, y + 1.6*h);
+
   fill(sTextColor);
   textSize(14);
-  text(document.getElementById('bajada1').value, l, y + h * 1.37);
+  text(sText1, l, y + h * 1.37);
 }
 
 function getColors() {
   mainColor = color(document.getElementById('cPrinc').value);
   secoColor = color(document.getElementById('cBajad').value);
   acceColor = color(document.getElementById('cAcent').value);
+  mTextColor = color(document.getElementById('cPrincText').value);
+  sTextColor = color(document.getElementById('cBajadText').value);
 }
