@@ -1,0 +1,7 @@
+body {
+}
+
+.p5Canvas {
+    /*transform: scale(50%);*/
+    border: dotted black 1px;
+}

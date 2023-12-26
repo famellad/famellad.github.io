@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GC</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
+        <script src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
+        <link rel="stylesheet" href="gcstyle.css">
+        <script src="https://github.com/processing/p5.js/releases/download/v1.9.0/p5.js"></script>
+        <script src="script.js"></script> 
+        <script>
+Coloris({
+  themeMode: 'light',
+  alpha: false,
+  format:  'rgb',
+  swatches: [
+    '#2f7de1',
+    '#d4dcf8',
+    '#dcea90',
+    '#fcd700',
+    '#f6a800',
+    '#ee3a41',
+    '#ffffff',
+    '#dcdadc',
+    '#54555a',
+    '#000000'
+  ],
+});
+</script>
+    </head>
+    <body>
+        <div id="canvasDiv"> </div>
+        <div id="configDiv">
+<form action="">
+  <fieldset>
+    <legend>Texto:</legend>
+    <label for="fname">Nombre:</label><br>
+    <input type="text" id="nombre" name="nombre" value="DR. IGNACIO SÁNCHEZ"><br><br>
+    
+    <label for="lname">Bajada:</label><br>
+    <input type="text" id="bajada1" name="bajada1" value="Rector Pontificia Universidad Católica"><br>
+    <input type="text" id="bajada2" name="bajada2" value=""><br><br>
+    
+    <label for="lname">Color Principal:</label><br>
+    <input type="text" id="cPrinc" value="rgb(47, 125, 225)" data-coloris><br>
+    
+    <label for="lname">Color Bajada:</label><br>
+    <input type="text" id="cBajad" value="rgb(212, 220, 248)" data-coloris><br>
+    
+    <label for="lname">Color Acento:</label><br>
+    <input type="text" id="cAcent" value="rgb(252, 215, 0)" data-coloris><br>
+  </fieldset>
+</form> 
+        </div>
+    </body>
+</html>
