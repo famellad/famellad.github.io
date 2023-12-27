@@ -1,7 +1,7 @@
 // Placeholder
 _SCALE = 2;
 
-let font;
+let currFont;
 
 let mainColor;
 let secoColor;
@@ -12,19 +12,26 @@ let sTextColor;
 
 let textMargin = 69;
 
-let topBarY = 818;
-let topBarH = 112;
+let topBarY = 780;
+let topBarH = 140;
+
+let accentW = 15;
+
+let minBarW = 150;
+let maxBarW = 400;
 
 let botBarY = topBarY + topBarH;
 let botBarH = 88;
 
+let tanTh = 0;
+
 function preload() {
-  //font = loadFont('Oswald-Regular.otf');
+  currFont = loadFont('https://famellad.github.io/gc/exres/Oswald-Regular.otf');
 }
 
 function setup() {
-  font = loadFont('https://famellad.github.io/cg/exres/Oswald-Regular.otf');
   frameRate(5);
+  textAlign(LEFT, BASELINE);
   var canvas = createCanvas(1920 / _SCALE, 1080 / _SCALE);
   canvas.parent('canvasDiv');
     
@@ -33,6 +40,8 @@ function setup() {
 
   botBarY = botBarY / _SCALE;
   botBarH = botBarH / _SCALE;
+
+  tanTh = 20 / topBarH;
 }
 
 function draw() {
@@ -50,31 +59,97 @@ function draw() {
   w = 600 / _SCALE;
   l = textMargin / _SCALE;
 
-  textFont(font);
+  textFont(currFont);
 
   drawBigBanner( mText );
-  drawSmallBanner( sText1, sText2 );
+
+  if (sText1 != '')
+    drawSmallBanner( sText1, sText2 );
 }
 
 function drawBigBanner( mText ) {
-  fill(acceColor);
-  quad(0, y, w + 20 + 15, y, w + 15, y + h, 0, y + h);
+  // Calculate width
+  tSize = 24; // Start assuming size 24
+  saneText = sanitizeText( mText )
+  textBB = currFont.textBounds(mText, 0, 0, tSize); // Get the bounding box
+
+  bigW = textBB.w + 2*l;
+
+  if (bigW < minBarW) {
+    bigW = minBarW;
+
+    newSize = tSize;
+
+    for (i = tSize; i <= 30; i += 0.1) {
+      textBB = currFont.textBounds(mText, 0, 0, tSize); // Get the bounding box
+      if (textBB.w >= bigW - 2*l)
+        break;
+      tSize = i;
+    }
+  }
+
+  else if (bigW > maxBarW) {
+    bigW = maxBarW;
+
+    newSize = tSize;
+
+    for (i = tSize; i >= 1; i -= 0.1) {
+      textBB = currFont.textBounds(mText, 0, 0, tSize); // Get the bounding box
+      if (textBB.w <= bigW - 2*l)
+        break;
+      tSize = i;
+    }
+  }
+
+  textH = currFont.textBounds(saneText, 0, 0, tSize).h;
+
+  if (document.getElementById('bAcento').checked) {
+    fill(acceColor);
+    quad(0, y, bigW + 20 + accentW, y, bigW + accentW, y + h, 0, y + h);
+  }
 
   fill(mainColor);
-  quad(0, y, w + 20, y, w, y + h, 0, y + h); 
+  quad(0, y, bigW + 20, y, bigW, y + h, 0, y + h); 
 
   fill(mTextColor);
-  textSize(24);
-  text(mText, l, y + h/1.5);
+  textSize(tSize);
+  text(mText, l, (textH + h) / 2 + y);
 }
 
 function drawSmallBanner ( sText1, sText2 ) {
+  ny = y + h;
+  nh = 0.70 * h;
+
+  off = nh * tanTh;
+  vOffset = 0;
+
+  tSize = 16;
+
+  numberOfLines = 1;
+
+  sText = sText1;
+  if (sText2 != '') {
+    sText += '\n' + sText2;
+    tSize = 12;
+    numberOfLines = 2;
+  }
+
+  saneText = sanitizeText(sText);
+
+  textSize(tSize);
+  sTextH = currFont.textBounds(saneText, 0, 0, tSize).h;
+  sTextW = currFont.textBounds(sText, 0, 0, tSize).w
+
+  if (numberOfLines == 2)
+    vOffset = -sTextH + 2;
+
+  smallW = sTextW + 2*l;
+
   fill(secoColor);
-  quad(0, y + h, w * 0.8 + 16, y + h, w * 0.8, y + 1.6*h, 0, y + 1.6*h);
+  quad(0, ny, smallW + off, ny, smallW, ny + nh, 0, ny + nh);
 
   fill(sTextColor);
-  textSize(14);
-  text(sText1, l, y + h * 1.37);
+  text(sText, l, ny + (nh - sTextH) / 2 + sTextH + vOffset);
 }
 
 function getColors() {
@@ -83,4 +158,23 @@ function getColors() {
   acceColor = color(document.getElementById('cAcent').value);
   mTextColor = color(document.getElementById('cPrincText').value);
   sTextColor = color(document.getElementById('cBajadText').value);
+}
+
+function sanitizeText( text ) {
+  return text.toUpperCase().replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U').replace('Ñ','N').replace(',','.').replace('\n','');
+}
+
+function bruteForceFontSize( smallen, currentSize, targetSize, text ) {
+  if (smallen) {
+    newSize = currentSize;
+
+    for (i = currentSize; i >= 1; i -= 0.5) {
+      newSize = i;
+      b = currFont.textBounds(text, 0, 0, newSize); // Get the bounding box
+      if (b.w <= targetSize)
+        return newSize;
+    }
+
+    return newSize;
+  }
 }
