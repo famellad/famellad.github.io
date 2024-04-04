@@ -1,5 +1,5 @@
 // Placeholder
-_SCALE = 2;
+_SCALE = 1;
 
 let currFont;
 
@@ -15,10 +15,10 @@ let textMargin = 69;
 let topBarY = 780;
 let topBarH = 140;
 
-let accentW = 15;
+let accentW = 30;
 
-let minBarW = 150;
-let maxBarW = 400;
+let minBarW = 300;
+let maxBarW = 800;
 
 let botBarY = topBarY + topBarH;
 let botBarH = 88;
@@ -69,7 +69,7 @@ function draw() {
 
 function drawBigBanner( mText ) {
   // Calculate width
-  tSize = 24; // Start assuming size 24
+  tSize = 48; // Start assuming size 48
   saneText = sanitizeText( mText )
   textBB = currFont.textBounds(mText, 0, 0, tSize); // Get the bounding box
 
@@ -80,7 +80,7 @@ function drawBigBanner( mText ) {
 
     newSize = tSize;
 
-    for (i = tSize; i <= 30; i += 0.1) {
+    for (i = tSize; i <= 60; i += 0.1) {
       textBB = currFont.textBounds(mText, 0, 0, tSize); // Get the bounding box
       if (textBB.w >= bigW - 2*l)
         break;
@@ -93,7 +93,7 @@ function drawBigBanner( mText ) {
 
     newSize = tSize;
 
-    for (i = tSize; i >= 1; i -= 0.1) {
+    for (i = tSize; i >= 2; i -= 0.1) {
       textBB = currFont.textBounds(mText, 0, 0, tSize); // Get the bounding box
       if (textBB.w <= bigW - 2*l)
         break;
@@ -123,14 +123,14 @@ function drawSmallBanner ( sText1, sText2 ) {
   off = nh * tanTh;
   vOffset = 0;
 
-  tSize = 16;
+  tSize = 32;
 
   numberOfLines = 1;
 
   sText = sText1;
   if (sText2 != '') {
     sText += '\n' + sText2;
-    tSize = 12;
+    tSize = 24;
     numberOfLines = 2;
   }
 

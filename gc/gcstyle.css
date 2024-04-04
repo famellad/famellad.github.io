@@ -19,3 +19,8 @@ body {
 .confItem {
     border: none;
 }
+
+.p5Canvas {
+    width: 960px !important;
+    height: 540px !important;
+}
