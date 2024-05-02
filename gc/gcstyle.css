@@ -36,35 +36,38 @@ body {
     border: none;
 }
 
+/*
 .p5Canvas {
     width: 960px !important;
     height: 540px !important;
-}
+}*/
 
-/*
 .p5Canvas {
-    width: 480px !important;
-    height: 270px !important;
-    transition: 0.3s;
+    max-width: 640px !important;
+    height: 360px !important;
+    transition: 0.2s;
 }
 
 .p5Canvas:hover {
-    width: 960px !important;
+    max-width: 960px !important;
     height: 540px !important;
 }
 
-.canvasDiv {
+#canvasDiv {
     margin: auto;
-    width: 480px !important;
-    height: 270px !important;
-    transition: 0.3s;
+    width: 640px !important;
+    height: 360px !important;
+    box-shadow: #00000022 0.2em 0.2em 0.2em;
+    border-radius: 2em;
+    transition: 0.2s;
 }
 
-.canvasDiv:hover {
+#canvasDiv:hover {
     width: 960px !important;
     height: 540px !important;
+    border-radius: 0.25em;
 }
-*/
+
 .confItem input[type=text] {
     border: 0;
     padding: 0.5em;
@@ -92,7 +95,7 @@ body {
     border-radius: 2em;
     box-shadow: #00000022 0.2em 0.2em 0.2em;
     background: #72a520;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
 #dlButton:hover {

@@ -13,7 +13,7 @@
 Coloris({
   themeMode: 'light',
   alpha: false,
-  format:  'rgb',
+  format:  'hex',
   formatToggle: true,
   swatches: [
     '#2f7de1',
@@ -33,7 +33,7 @@ Coloris({
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
 <body>
 <div id="container">
-        <div id="canvasDiv" width="960px" height="540px" style="width: 960px !important; height: 540px !important;"> </div> <br>
+        <div id="canvasDiv"></div> <br>
         <div id="configDiv">
 <form action="">
   <div class="configGrid">
@@ -45,12 +45,12 @@ Coloris({
 
     <div class="confItem">
       <label for="lname">Fondo Nombre:</label><br>
-      <input type="text" id="cPrinc" value="rgb(47, 125, 225)" data-coloris><br>
+      <input type="text" id="cPrinc" value="#2f7de1" data-coloris><br>
     </div>
 
     <div class="confItem">
       <label for="lname">Color Nombre:</label><br>
-      <input type="text" id="cPrincText" value="rgb(255, 255, 255)" data-coloris><br>
+      <input type="text" id="cPrincText" value="#ffffff" data-coloris><br>
     </div>
 
     <!-- SEGUNDA FILA-->
@@ -62,12 +62,12 @@ Coloris({
     
     <div class="confItem">
       <label for="lname">Fondo Bajada:</label><br>
-      <input type="text" id="cBajad" value="rgb(212, 220, 248)" data-coloris><br>
+      <input type="text" id="cBajad" value="#d4dcf8" data-coloris><br>
     </div>
 
     <div class="confItem">
       <label for="lname">Color Bajada:</label><br>
-      <input type="text" id="cBajadText" value="rgb(0, 0, 0)" data-coloris><br>
+      <input type="text" id="cBajadText" value="#000000" data-coloris><br>
     </div>
 
     <!-- TERCERA FILA-->
@@ -78,7 +78,7 @@ Coloris({
 
     <div class="confItem">
       <label for="lname">Color Acento:</label><br>
-      <input type="text" id="cAcent" value="rgb(252, 215, 0)" data-coloris><br>
+      <input type="text" id="cAcent" value="#dcea90" data-coloris><br>
     </div>
 
     <div class="confItem">
