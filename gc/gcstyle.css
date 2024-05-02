@@ -5,10 +5,26 @@
 
 body {
     font-family: Nunito, sans-serif;
+    /*padding: 0;
+    margin: 0;*/
+}
+
+#container {
+    margin-left: auto;
+    margin-right: auto;
+    background:#e6e6e6;
+    width: 960px;
+    padding: 2em;
+    border-radius: 1em;
+    box-shadow: #00000033 0.5em 0.5em 0.5em;
+}
+
+#canvasDiv {
+    background: url(assets/check.png);
 }
 
 .p5Canvas {
-    border: dotted black 1px;
+    border: 0;
 }
 
 .configGrid {
@@ -23,4 +39,62 @@ body {
 .p5Canvas {
     width: 960px !important;
     height: 540px !important;
+}
+
+/*
+.p5Canvas {
+    width: 480px !important;
+    height: 270px !important;
+    transition: 0.3s;
+}
+
+.p5Canvas:hover {
+    width: 960px !important;
+    height: 540px !important;
+}
+
+.canvasDiv {
+    margin: auto;
+    width: 480px !important;
+    height: 270px !important;
+    transition: 0.3s;
+}
+
+.canvasDiv:hover {
+    width: 960px !important;
+    height: 540px !important;
+}
+*/
+.confItem input[type=text] {
+    border: 0;
+    padding: 0.5em;
+    margin: 0.25em;
+    border-radius: 0.5em;
+    box-shadow: #00000022 0.2em 0.2em 0.2em;
+}
+
+.confItem button[aria-labelledby="clr-open-label"] {
+    border-radius: 2em;
+    box-shadow: #00000022 0.2em 0.2em 0.2em;
+}
+
+#dlButton {
+    position: fixed;
+
+    right: 2em;
+    bottom: 2em;
+    border: #bcdb8a;
+    width: 3em;
+    height: 3em;
+    max-width: 3em;
+    max-height: 3em;
+    font-size: 1.5em;
+    border-radius: 2em;
+    box-shadow: #00000022 0.2em 0.2em 0.2em;
+    background: #72a520;
+    transition: 0.3s;
+}
+
+#dlButton:hover {
+    background: #a1cf55;
 }

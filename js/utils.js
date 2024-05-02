@@ -26,6 +26,22 @@ function sanitizeString (inStr) {
     return inStr;
 }
 
+function superSanitizeString (inStr) {
+    inStr = inStr.replace("(", "").replace(")", "");
+    inStr = inStr.replace(",", "").replace(".", "");
+    inStr = inStr.toLowerCase();
+    inStr = inStr.replace("ñ", "n");
+    inStr = inStr.replace("á", "a");
+    inStr = inStr.replace("é", "e");
+    inStr = inStr.replace("í", "i");
+    inStr = inStr.replace("ó", "o");
+    inStr = inStr.replace("ú", "u");
+    inStr = inStr.replace("ú", "u");
+    inStr = inStr.replace("ç", "c");
+
+    return inStr;
+}
+
 /**
  * Places a GET request for the file from the specified URI asynchronously
  * @param {string} fileURI
