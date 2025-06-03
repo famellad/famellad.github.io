@@ -11,6 +11,7 @@
         <script type="text/javascript" src="drawCG.js" defer="defer"></script> 
         <script>
 Coloris({
+  theme: 'pill',
   themeMode: 'light',
   alpha: false,
   format:  'hex',
@@ -31,7 +32,7 @@ Coloris({
 </script>
 <meta charset="utf-8">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
-<body>
+<body onload="readGET()">
 <div id="container">
         <div id="canvasDiv"></div> <br>
         <div id="configDiv">
@@ -45,12 +46,12 @@ Coloris({
 
     <div class="confItem">
       <label for="lname">Fondo Nombre:</label><br>
-      <input type="text" id="cPrinc" value="#2f7de1" data-coloris><br>
+      <input type="text" class="color-field" id="cPrinc" value="#2f7de1" data-coloris><br>
     </div>
 
     <div class="confItem">
       <label for="lname">Color Nombre:</label><br>
-      <input type="text" id="cPrincText" value="#ffffff" data-coloris><br>
+      <input type="text" class="color-field" id="cPrincText" value="#ffffff" data-coloris><br>
     </div>
 
     <!-- SEGUNDA FILA-->
@@ -62,23 +63,23 @@ Coloris({
     
     <div class="confItem">
       <label for="lname">Fondo Bajada:</label><br>
-      <input type="text" id="cBajad" value="#d4dcf8" data-coloris><br>
+      <input type="text" class="color-field" id="cBajad" value="#d4dcf8" data-coloris><br>
     </div>
 
     <div class="confItem">
       <label for="lname">Color Bajada:</label><br>
-      <input type="text" id="cBajadText" value="#000000" data-coloris><br>
+      <input type="text" class="color-field" id="cBajadText" value="#000000" data-coloris><br>
     </div>
 
     <!-- TERCERA FILA-->
     <div class="confItem">
       <label for="lname">Acento:</label>
-      <input type="checkbox" id="bAcento" checked="True"><br>
+      <input type="checkbox" id="bAcento" checked="True" onclick="writeGET()"><br>
     </div>
 
     <div class="confItem">
       <label for="lname">Color Acento:</label><br>
-      <input type="text" id="cAcent" value="#fcd700" data-coloris><br>
+      <input type="text" class="color-field" id="cAcent" value="#fcd700" data-coloris><br>
     </div>
 
     <div class="confItem">
