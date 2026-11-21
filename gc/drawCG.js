@@ -12,6 +12,8 @@ let sTextColor;
 
 let mL, mR;
 
+let layerMain, layerSmall;
+
 let theme = {};
 
 async function loadTheme(name) {
@@ -42,8 +44,11 @@ function setup() {
   pixelDensity(_SCALE); // TODO add a checkbox if the user wants it in 4K?
   noLoop()
   textAlign(LEFT, BASELINE);
-  var canvas = createCanvas(1920, 1080);
+  const canvas = createCanvas(1920, 1080);
   canvas.parent('canvasDiv');
+
+  layerMain = createGraphics(1920, 1080);
+  layerSmall = createGraphics(1920, 1080);
 }
 
 function draw() {
@@ -67,10 +72,10 @@ function draw() {
 
   textFont(currFont);
 
-  drawBigBanner( mText );
-
   if (sText1 != '')
     drawSmallBanner( sText1, sText2 );
+
+  drawBigBanner( mText );
 }
 
 function drawBigBanner( mText ) {
@@ -95,15 +100,18 @@ function drawBigBanner( mText ) {
 
 
     bigW = Math.ceil(bigW)
-    tint(mainColor);
-    image(theme.img.nbod, 0, y, bigW, h);
-    image(theme.img.ntip, bigW - 1, y);
+    layerMain.clear();
+    layerMain.tint(mainColor);
+    layerMain.image(theme.img.nbod, 0, y, bigW, h);
+    layerMain.image(theme.img.ntip, bigW - 1, y);
 
     if (document.getElementById("bAcento").checked) {
-      tint(acceColor);
-      if (theme.accAnchor == "ntip") image(theme.img.acc, bigW + theme.img.ntip.width + theme.accOffset - 1, y);
-      else if (theme.accAnchor == "left") image(theme.img.acc, theme.accOffset - 1, y);
+      layerMain.tint(acceColor);
+      if (theme.accAnchor == "ntip") layerMain.image(theme.img.acc, bigW + theme.img.ntip.width + theme.accOffset - 1, y);
+      else if (theme.accAnchor == "left") layerMain.image(theme.img.acc, theme.accOffset - 1, y);
     }
+
+    drawWithShadow(layerMain);
 
     fill(mTextColor);
     textSize(tSize);
@@ -138,13 +146,30 @@ function drawSmallBanner ( sText1, sText2 ) {
 
   smallW = sTextW + mL + mR;
 
-  smallW = Math.ceil(smallW)
-  tint(secoColor);
-  image(theme.img.bbod, 0, ny, smallW, nh);
-  image(theme.img.btip, smallW - 1, ny);  
+  smallW = Math.ceil(smallW);
+  layerSmall.clear();
+  layerSmall.tint(secoColor);
+  layerSmall.image(theme.img.bbod, 0, ny, smallW, nh);
+  layerSmall.image(theme.img.btip, smallW - 1, ny);
+  drawWithShadow(layerSmall);
 
   fill(sTextColor);
   text(sText, mL, ny + (nh - sTextH) / 2 + sTextH + vOffset);
+}
+
+function drawWithShadow(layer) {
+  push();
+  noTint();
+
+  if (theme.shadow && document.getElementById("bSombra").checked) {
+    const ctx = drawingContext;
+    ctx.shadowColor   = `rgba(0, 0, 0, ${theme.shadow.opacity})`;
+    ctx.shadowBlur    = theme.shadow.blur;
+    ctx.shadowOffsetX = theme.shadow.offsetX;
+    ctx.shadowOffsetY = theme.shadow.offsetY;
+  }
+  image(layer, 0, 0);
+  pop();
 }
 
 function getColors() {

@@ -1,13 +1,19 @@
 {
   "name": "familiar",
+  "gcAlign": "left",
   "gcY": 780,
-  "nomH": 140,
-  "bajH": 98,
   "textMarginL": 69,
   "textMarginR": 0,
   "minBarW": 300,
   "maxBarW": 800,
+  "nomH": 140,
+  "bajH": 98,
   "accOffset": -21,
   "accAnchor": "ntip",
-  "gcAlign": "left"
+  "shadow": { 
+    "blur": 26,
+    "offsetX": 0,
+    "offsetY": 8,
+    "opacity": 0.4
+  }
 }

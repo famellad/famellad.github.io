@@ -27,6 +27,7 @@ function readGET () {
     let bgt = params.get('bgt'); let fgt = params.get('fgt');
     let acc = params.get('acc'); let cac = params.get('cac');
     let thm = params.get('thm'); let pal = params.get('pal'); let fnt = params.get('fnt');
+    let shd = params.get('shd');
 
     // Name colors
     if (bgn != null) document.getElementById("cPrinc").value = "#" + bgn;
@@ -39,6 +40,7 @@ function readGET () {
     // Accent
     if (cac != null) document.getElementById("cAcent").value = "#" + cac;
     if (acc != null) document.getElementById("bAcento").checked = (acc === "true");
+    if (shd != null) document.getElementById("bSombra").checked = (shd === "true");
 
     // Theming stuff
     if (thm != null) document.getElementById("ddTheme").value = thm;
@@ -62,12 +64,13 @@ function writeGET () {
 
     let cac = document.getElementById("cAcent").value.replace('#','');
     let acc = document.getElementById("bAcento").checked;
+    let shd = document.getElementById("bSombra").checked;
 
     let thm = document.getElementById("ddTheme").value;
     let pal = document.getElementById("ddPalette").value;
     let fnt = document.getElementById("ddFont").value;
 
-    let GETstring = "?bgn=" + bgn + "&fgn=" + fgn + "&bgt=" + bgt + "&fgt=" + fgt + "&cac=" + cac + "&acc=" + acc + "&thm=" + thm + "&pal=" + pal + "&fnt=" + fnt;
+    let GETstring = "?bgn=" + bgn + "&fgn=" + fgn + "&bgt=" + bgt + "&fgt=" + fgt + "&cac=" + cac + "&acc=" + acc + "&shd=" + shd + "&thm=" + thm + "&pal=" + pal + "&fnt=" + fnt;
 
     url = window.location.href;
     url = url.split('?')[0] + GETstring;
