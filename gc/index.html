@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
+      <meta charset="utf-8">
         <title>GC</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.css"/>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/mdbassit/Coloris@latest/dist/coloris.min.js"></script>
@@ -29,9 +30,9 @@ Coloris({
     '#000000'
   ],
 });
-</script>
-<meta charset="utf-8">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+        </script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.0/font/bootstrap-icons.css">
+</head>
 <body onload="readGET()">
 <div id="container">
         <div id="canvasDiv"></div> <br>
@@ -40,45 +41,63 @@ Coloris({
   <div class="configGrid">
     <!-- PRIMERA FILA-->
     <div class="confItem">
-      <label for="fname">Nombre:</label><br>
+      <label for="nombre">Nombre:</label><br>
       <input type="text" id="nombre" name="nombre" value="SR. JUAN CARLOS DE LA LLERA"><br><br>
     </div>
 
     <div class="confItem">
-      <label for="lname">Fondo Nombre:</label><br>
+      <label for="cPrinc">Fondo Nombre:</label><br>
       <input type="text" class="color-field" id="cPrinc" value="#2f7de1" data-coloris><br>
     </div>
 
     <div class="confItem">
-      <label for="lname">Color Nombre:</label><br>
+      <label for="cPrincText">Texto Nombre:</label><br>
       <input type="text" class="color-field" id="cPrincText" value="#ffffff" data-coloris><br>
     </div>
 
     <!-- SEGUNDA FILA-->
     <div class="confItem">
-      <label for="lname">Bajada:</label><br>
+      <label for="bajada1">Bajada:</label><br>
       <input type="text" id="bajada1" name="bajada1" value="Rector Pontificia Universidad Católica"><br>
       <input type="text" id="bajada2" name="bajada2" value=""><br><br>
     </div>
     
     <div class="confItem">
-      <label for="lname">Fondo Bajada:</label><br>
+      <label for="cBajad">Fondo Bajada:</label><br>
       <input type="text" class="color-field" id="cBajad" value="#d4dcf8" data-coloris><br>
     </div>
 
     <div class="confItem">
-      <label for="lname">Color Bajada:</label><br>
+      <label for="cBajadText">Texto Bajada:</label><br>
       <input type="text" class="color-field" id="cBajadText" value="#000000" data-coloris><br>
     </div>
 
     <!-- TERCERA FILA-->
     <div class="confItem">
-      <label for="lname">Acento:</label>
-      <input type="checkbox" id="bAcento" checked="True" onclick="writeGET()"><br>
+      <label for="ddTheme">Tema:</label> &emsp;
+      <select id="ddTheme" onchange="reloadTheme()" disabled>
+        <option value="familiar" selected>Familiar</option>
+        <option value="moderno">Moderno</option>
+        <option value="ludico">Lúdico</option>
+      </select> <br>
+      <label for="ddPalette">Paleta:</label> &emsp;
+      <select id="ddPalette" onchange="reloadPalette()" disabled>
+        <option value="puc" selected>La UC</option>
+        <option value="puc2">2</option>
+        <option value="puc3">3</option>
+      </select> <br>
+      <label for="ddFont">Fuente:</label> &emsp;
+      <select id="ddFont" onchange="writeGET()" disabled>
+        <option value="oswald" selected>Oswald</option>
+        <option value="fnt2">2</option>
+        <option value="fnt3">3</option>
+      </select> <br>
     </div>
 
     <div class="confItem">
-      <label for="lname">Color Acento:</label><br>
+      <label for="bAcento">Acento:</label>
+      <input type="checkbox" id="bAcento" checked="True" onclick="writeGET()"><br> <br>
+      <label for="cAcent">Color Acento:</label><br>
       <input type="text" class="color-field" id="cAcent" value="#fcd700" data-coloris><br>
     </div>
 

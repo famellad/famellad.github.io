@@ -19,22 +19,14 @@ body {
     box-shadow: #00000033 0.5em 0.5em 0.5em;
 }
 
-#canvasDiv {
-    background: url(assets/check.png);
-}
-
-.p5Canvas {
-    border: 0;
-}
-
 .configGrid {
     display: grid;
     grid-template-columns: 15em 15em 15em;
 }
 
-.confItem {
+/*.confItem {
     border: none;
-}
+}*/
 
 /*
 .p5Canvas {
@@ -43,6 +35,7 @@ body {
 }*/
 
 .p5Canvas {
+    border: 0;
     max-width: 640px !important;
     height: 360px !important;
     transition: 0.2s;
@@ -60,6 +53,7 @@ body {
     box-shadow: #00000022 0.2em 0.2em 0.2em;
     border-radius: 2em;
     transition: 0.2s;
+    background: url(assets/check.png);
 }
 
 #canvasDiv:hover {
@@ -81,12 +75,21 @@ body {
     box-shadow: #00000022 0.2em 0.2em 0.2em;
 }
 
+.confItem select {
+    background: #fff;
+    border: 0;
+    padding: 0.5em;
+    margin: 0.25em;
+    border-radius: 0.5em;
+    box-shadow: #00000022 0.2em 0.2em 0.2em;    
+}
+
 #dlButton {
     position: fixed;
 
     right: 2em;
     bottom: 2em;
-    border: #bcdb8a;
+    border: none;
     width: 3em;
     height: 3em;
     max-width: 3em;

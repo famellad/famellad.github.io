@@ -1,5 +1,5 @@
 // Placeholder
-_SCALE = 1;
+const _SCALE = 1;
 
 let currFont;
 
@@ -10,54 +10,60 @@ let acceColor;
 let mTextColor;
 let sTextColor;
 
-let textMargin = 69;
+let mL, mR;
 
-let topBarY = 780;
-let topBarH = 140;
+let theme = {};
 
-let accentW = 30;
+async function loadTheme(name) {
+  const base = `themes/${name}/`;
 
-let minBarW = 300;
-let maxBarW = 800;
+  const res = await fetch(base + 'theme.json');
+  if (!res.ok) throw new Error(`Can't load ${res.url} (HTTP ${res.status})`);
+  const data = await res.json();
 
-let botBarY = topBarY + topBarH;
-let botBarH = 88;
+  const parts = ['nbod', 'ntip', 'bbod', 'btip', 'acc'];
+  const imgs = await Promise.all(parts.map(p =>
+    new Promise((resolve, reject) =>
+      loadImage(base + p + '.png', resolve,
+                () => reject(new Error(`Missing image: ${base + p}.png`)))
+    )
+  ));
 
-let tanTh = 0;
+  data.img = Object.fromEntries(parts.map((p, i) => [p, imgs[i]]));
+  theme = data;
+  redraw();
+}
 
 function preload() {
-  currFont = loadFont('https://famellad.github.io/gc/exres/Oswald-Regular.otf');
+  currFont = loadFont('exres/Oswald-Regular.otf');
 }
 
 function setup() {
-  frameRate(5);
+  pixelDensity(_SCALE); // TODO add a checkbox if the user wants it in 4K?
+  noLoop()
   textAlign(LEFT, BASELINE);
-  var canvas = createCanvas(1920 / _SCALE, 1080 / _SCALE);
+  var canvas = createCanvas(1920, 1080);
   canvas.parent('canvasDiv');
-    
-  topBarY = topBarY / _SCALE;
-  topBarH = topBarH / _SCALE;
-
-  botBarY = botBarY / _SCALE;
-  botBarH = botBarH / _SCALE;
-
-  tanTh = 20 / topBarH;
 }
 
 function draw() {
-  clear();
+  clear(); // Clear the image to let the user know something is happening
+
+  if (!theme.img) return; // Wait for a theme to be loaded before attempting any draws
+
   noStroke();
 
   getColors();
 
-  mText = document.getElementById('nombre').value
-  sText1 = document.getElementById('bajada1').value
-  sText2 = document.getElementById('bajada2').value
+  let mText = document.getElementById('nombre').value
+  let sText1 = document.getElementById('bajada1').value
+  let sText2 = document.getElementById('bajada2').value
 
-  y = topBarY;
-  h = topBarH;
-  w = 600 / _SCALE;
-  l = textMargin / _SCALE;
+  y = theme.gcY;
+  h = theme.nomH;
+
+  mL = theme.textMarginL ?? 0;
+  mR = theme.textMarginR ?? 0;
 
   textFont(currFont);
 
@@ -69,58 +75,45 @@ function draw() {
 
 function drawBigBanner( mText ) {
   // Calculate width
-  tSize = 48; // Start assuming size 48
-  saneText = sanitizeText( mText )
-  textBB = currFont.textBounds(mText, 0, 0, tSize); // Get the bounding box
+  const START_SIZE = 48;
+  const pad = mL + mR;
+  let tSize = START_SIZE;
+  let saneText = superSanitizeString(mText);
 
-  bigW = textBB.w + 2*l;
+  let bigW = currFont.textBounds(mText, 0, 0, START_SIZE).w + pad;
 
-  if (bigW < minBarW) {
-    bigW = minBarW;
+  if (bigW < theme.minBarW) {            // short text: bar grows to min, text scales up (max 60)
+    bigW = theme.minBarW;
+    tSize = fitTextSize(mText, START_SIZE, bigW - pad, START_SIZE, 60);
+  }
+  else if (bigW > theme.maxBarW) {       // long text: bar stops at max, text shrinks to fit (min 2)
+    bigW = theme.maxBarW;
+    tSize = fitTextSize(mText, START_SIZE, bigW - pad, 2, START_SIZE);
+  }
 
-    newSize = tSize;
+  let textH = currFont.textBounds(saneText, 0, 0, tSize).h;
 
-    for (i = tSize; i <= 60; i += 0.1) {
-      textBB = currFont.textBounds(mText, 0, 0, tSize); // Get the bounding box
-      if (textBB.w >= bigW - 2*l)
-        break;
-      tSize = i;
+
+    bigW = Math.ceil(bigW)
+    tint(mainColor);
+    image(theme.img.nbod, 0, y, bigW, h);
+    image(theme.img.ntip, bigW - 1, y);
+
+    if (document.getElementById("bAcento").checked) {
+      tint(acceColor);
+      if (theme.accAnchor == "ntip") image(theme.img.acc, bigW + theme.img.ntip.width + theme.accOffset - 1, y);
+      else if (theme.accAnchor == "left") image(theme.img.acc, theme.accOffset - 1, y);
     }
+
+    fill(mTextColor);
+    textSize(tSize);
+    text(mText, mL, (textH + h) / 2 + y);
   }
-
-  else if (bigW > maxBarW) {
-    bigW = maxBarW;
-
-    newSize = tSize;
-
-    for (i = tSize; i >= 2; i -= 0.1) {
-      textBB = currFont.textBounds(mText, 0, 0, tSize); // Get the bounding box
-      if (textBB.w <= bigW - 2*l)
-        break;
-      tSize = i;
-    }
-  }
-
-  textH = currFont.textBounds(saneText, 0, 0, tSize).h;
-
-  if (document.getElementById('bAcento').checked) {
-    fill(acceColor);
-    quad(0, y, bigW + 20 + accentW, y, bigW + accentW, y + h, 0, y + h);
-  }
-
-  fill(mainColor);
-  quad(0, y, bigW + 20, y, bigW, y + h, 0, y + h); 
-
-  fill(mTextColor);
-  textSize(tSize);
-  text(mText, l, (textH + h) / 2 + y);
-}
 
 function drawSmallBanner ( sText1, sText2 ) {
   ny = y + h;
-  nh = 0.70 * h;
+  nh = theme.bajH;
 
-  off = nh * tanTh;
   vOffset = 0;
 
   tSize = 32;
@@ -134,22 +127,24 @@ function drawSmallBanner ( sText1, sText2 ) {
     numberOfLines = 2;
   }
 
-  saneText = sanitizeText(sText);
+  saneText = superSanitizeString(sText);
 
   textSize(tSize);
   sTextH = currFont.textBounds(saneText, 0, 0, tSize).h;
   sTextW = currFont.textBounds(sText, 0, 0, tSize).w
 
   if (numberOfLines == 2)
-    vOffset = -sTextH + 2;
+    vOffset = -sTextH + 16;
 
-  smallW = sTextW + 2*l;
+  smallW = sTextW + mL + mR;
 
-  fill(secoColor);
-  quad(0, ny, smallW + off, ny, smallW, ny + nh, 0, ny + nh);
+  smallW = Math.ceil(smallW)
+  tint(secoColor);
+  image(theme.img.bbod, 0, ny, smallW, nh);
+  image(theme.img.btip, smallW - 1, ny);  
 
   fill(sTextColor);
-  text(sText, l, ny + (nh - sTextH) / 2 + sTextH + vOffset);
+  text(sText, mL, ny + (nh - sTextH) / 2 + sTextH + vOffset);
 }
 
 function getColors() {
@@ -160,21 +155,9 @@ function getColors() {
   sTextColor = color(document.getElementById('cBajadText').value);
 }
 
-function sanitizeText( text ) {
-  return text.toUpperCase().replace('Á','A').replace('É','E').replace('Í','I').replace('Ó','O').replace('Ú','U').replace('Ñ','N').replace(',','.').replace('\n','');
-}
-
-function bruteForceFontSize( smallen, currentSize, targetSize, text ) {
-  if (smallen) {
-    newSize = currentSize;
-
-    for (i = currentSize; i >= 1; i -= 0.5) {
-      newSize = i;
-      b = currFont.textBounds(text, 0, 0, newSize); // Get the bounding box
-      if (b.w <= targetSize)
-        return newSize;
-    }
-
-    return newSize;
-  }
+// Returns the font size at which `txt` is exactly `targetW` wide, clamped to [minS, maxS]
+function fitTextSize(txt, startSize, targetW, minS, maxS) {
+  const w = currFont.textBounds(txt, 0, 0, startSize).w;
+  if (!w) return startSize;                       // empty text
+  return constrain(startSize * targetW / w, minS, maxS);
 }

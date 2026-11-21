@@ -1,38 +1,15 @@
 // https://stackoverflow.com/questions/8126623/downloading-canvas-element-to-an-image
-function downloadCanvasAsImage(){
-    let canvasImage = document.getElementById('defaultCanvas0').toDataURL('image/png');
-    
-    // this can be used to download any image from webpage to local disk
-    let xhr = new XMLHttpRequest();
-    xhr.responseType = 'blob';
-    xhr.onload = function () {
-        let a = document.createElement('a');
-        a.href = window.URL.createObjectURL(xhr.response);
-        a.download = filenameString();
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-      };
-      xhr.open('GET', canvasImage); // This is to download the canvas Image
-      xhr.send();
+function downloadCanvasAsImage() {
+    saveCanvas(filenameString(), 'png');
+}
+
+function filenameString() {
+    const name = superSanitizeString(document.getElementById('nombre').value);
+    return Math.floor(Date.now() / 1000) + "-" + name;   // no ".png" here anymore
 }
 
 function superSanitizeString (inStr) {
-    inStr = inStr.replace("(", "").replace(")", "");
-    inStr = inStr.replace(",", "").replace(".", "");
-    inStr = inStr.toLowerCase();
-    inStr = inStr.replace("ñ", "n");
-    inStr = inStr.replace("á", "a");
-    inStr = inStr.replace("é", "e");
-    inStr = inStr.replace("í", "i");
-    inStr = inStr.replace("ó", "o");
-    inStr = inStr.replace("ú", "u");
-    inStr = inStr.replace("ú", "u");
-    inStr = inStr.replace("ç", "c");
-    inStr = inStr.toUpperCase();
-
-    return inStr;
+    return inStr.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[(),.]/g, '').toUpperCase();
 }
 
 function filenameString() {
@@ -45,32 +22,30 @@ function filenameString() {
 }
 
 function readGET () {
-    // bgn fgn
-    // bgt fgt
-    // acc cac
-    // nam
-    // ti1 ti2
     let params = new URLSearchParams(location.search);
     let bgn = params.get('bgn'); let fgn = params.get('fgn');
     let bgt = params.get('bgt'); let fgt = params.get('fgt');
     let acc = params.get('acc'); let cac = params.get('cac');
+    let thm = params.get('thm'); let pal = params.get('pal'); let fnt = params.get('fnt');
 
-    if (bgn != null)
-        document.getElementById("cPrinc").value = "#" + bgn.toString();
-    if (fgn != null)
-        document.getElementById("cPrincText").value = "#" + fgn.toString();
+    // Name colors
+    if (bgn != null) document.getElementById("cPrinc").value = "#" + bgn;
+    if (fgn != null) document.getElementById("cPrincText").value = "#" + fgn;
 
-    if (bgt != null)
-        document.getElementById("cBajad").value = "#" + bgt.toString();
-    if (fgt != null)
-        document.getElementById("cBajadText").value = "#" + fgt.toString();
+    // Subtext colors
+    if (bgt != null) document.getElementById("cBajad").value = "#" + bgt;
+    if (fgt != null) document.getElementById("cBajadText").value = "#" + fgt;
 
-    if (cac != null)
-        document.getElementById("cAcent").value = "#" + cac.toString();
+    // Accent
+    if (cac != null) document.getElementById("cAcent").value = "#" + cac;
+    if (acc != null) document.getElementById("bAcento").checked = (acc === "true");
 
-    if (acc != null)
-        document.getElementById("bAcento").checked = (acc === "true");
+    // Theming stuff
+    if (thm != null) document.getElementById("ddTheme").value = thm;
+    if (pal != null) document.getElementById("ddPalette").value = pal;
+    if (fnt != null) document.getElementById("ddFont").value = fnt;
 
+    loadTheme(thm ?? 'familiar')
     document.querySelector('#cPrinc').dispatchEvent(new Event('input', { bubbles: true }));
     document.querySelector('#cPrincText').dispatchEvent(new Event('input', { bubbles: true }));
     document.querySelector('#cBajad').dispatchEvent(new Event('input', { bubbles: true }));
@@ -79,7 +54,6 @@ function readGET () {
 }
 
 function writeGET () {
-    // ?bgn=000000&fgn=ff0000&bgt=00ff00&fgt=0000ff&cac=ffff00&acc=False
     let bgn = document.getElementById("cPrinc").value.replace('#','');
     let fgn = document.getElementById("cPrincText").value.replace('#','');
 
@@ -89,16 +63,32 @@ function writeGET () {
     let cac = document.getElementById("cAcent").value.replace('#','');
     let acc = document.getElementById("bAcento").checked;
 
-    let GETstring = "?bgn=" + bgn + "&fgn=" + fgn + "&bgt=" + bgt + "&fgt=" + fgt + "&cac=" + cac + "&acc=" + acc;
+    let thm = document.getElementById("ddTheme").value;
+    let pal = document.getElementById("ddPalette").value;
+    let fnt = document.getElementById("ddFont").value;
+
+    let GETstring = "?bgn=" + bgn + "&fgn=" + fgn + "&bgt=" + bgt + "&fgt=" + fgt + "&cac=" + cac + "&acc=" + acc + "&thm=" + thm + "&pal=" + pal + "&fnt=" + fnt;
 
     url = window.location.href;
     url = url.split('?')[0] + GETstring;
 
-    //url.searchParams.set('bgn', bgn)
-
 	history.replaceState(history.state, '', url);
+}
+
+function reloadTheme() {
+    newTheme = document.getElementById("ddTheme").value;
+
+    loadTheme(newTheme);
+
+    writeGET();
 }
 
 document.addEventListener('coloris:pick', event => {
     writeGET();
+});
+
+document.getElementById('configDiv').addEventListener('input', () => redraw());
+document.addEventListener('coloris:pick', event => {
+    writeGET();
+    redraw();
 });

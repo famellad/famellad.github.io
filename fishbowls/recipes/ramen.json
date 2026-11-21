@@ -1,0 +1,32 @@
+{
+    "name": "Ramen",
+    "cook": "Felipe",
+    "difficulty": "easy",
+    "time": "short",
+    "cost": "low",
+    "mandatory_ingredients": {
+        "protein": 125,
+        "ramen_noodles": 1,
+        "egg": 1,
+        "mushroom": 2,
+        "green_onion": 0.5,
+        "stock": 0.5,
+        "mirin": 50
+    },
+    "seasoning": {
+        "sesame_oil": 1,
+        "ginger": 1,
+        "black_pepper": 1,
+        "msg": 1,
+        "garlic": 1
+    },
+    "optional_ingredients": {
+        "fish_cake": 1,
+        "sesame_seeds": 1,
+        "cilantro": 1,
+        "nori": 1,
+        "bean_sprouts": 1,
+        "bok_choy": 0.5,
+        "tofu": 50
+    }
+}
