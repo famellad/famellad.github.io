@@ -39,10 +39,11 @@ Coloris({
         <div id="configDiv">
 <form action="">
   <div class="configGrid">
+
     <!-- PRIMERA FILA-->
     <div class="confItem">
       <label for="nombre">Nombre:</label><br>
-      <input type="text" id="nombre" name="nombre" value="SR. JUAN CARLOS DE LA LLERA"><br><br>
+      <input type="text" id="nombre" name="nombre" value="SR. JUAN CARLOS DE LA LLERA"><br>
     </div>
 
     <div class="confItem">
@@ -53,13 +54,15 @@ Coloris({
     <div class="confItem">
       <label for="cPrincText">Texto Nombre:</label><br>
       <input type="text" class="color-field" id="cPrincText" value="#ffffff" data-coloris><br>
+      <select id="ddFuenteN" onchange="reloadFont()"></select>
+      <input type="checkbox" id="bNegritaN" onchange="reloadFont()"> <label for="bNegritaN">B</label> <br>      <br>
     </div>
 
     <!-- SEGUNDA FILA-->
     <div class="confItem">
       <label for="bajada1">Bajada:</label><br>
       <input type="text" id="bajada1" name="bajada1" value="Rector Pontificia Universidad Católica"><br>
-      <input type="text" id="bajada2" name="bajada2" value=""><br><br>
+      <input type="text" id="bajada2" name="bajada2" value=""><br>
     </div>
     
     <div class="confItem">
@@ -70,6 +73,8 @@ Coloris({
     <div class="confItem">
       <label for="cBajadText">Texto Bajada:</label><br>
       <input type="text" class="color-field" id="cBajadText" value="#000000" data-coloris><br>
+      <select id="ddFuenteB" onchange="reloadFont()"></select>
+      <input type="checkbox" id="bNegritaB" onchange="reloadFont()"> <label for="bNegritaB">B</label> <br>      <br>
     </div>
 
     <!-- TERCERA FILA-->
@@ -85,12 +90,6 @@ Coloris({
         <option value="puc" selected>La UC</option>
         <option value="puc2">2</option>
         <option value="puc3">3</option>
-      </select> <br>
-      <label for="ddFont">Fuente:</label> &emsp;
-      <select id="ddFont" onchange="writeGET()" disabled>
-        <option value="oswald" selected>Oswald</option>
-        <option value="fnt2">2</option>
-        <option value="fnt3">3</option>
       </select> <br>
     </div>
 
